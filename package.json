@@ -1,0 +1,34 @@
+{
+  "name": "todoapi",
+  "version": "1.0.0",
+  "description": "Todo list API",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon .",
+    "start": "pm2 start index.js --name 'todoApi'",
+    "restart": "pm2 restart 'todoApi'",
+    "stop": "pm2 stop 'todoApi'",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abarbieu/todoApi.git"
+  },
+  "author": "Aidan Barbieux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abarbieu/todoApi/issues"
+  },
+  "homepage": "https://github.com/abarbieu/todoApi#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "moment": "^2.27.0",
+    "pg": "^8.2.2"
+  },
+  "devDependencies": {
+    "jest": "^26.1.0",
+    "supertest": "^4.0.2"
+  }
+}
