@@ -1,15 +1,16 @@
-const dotenv = require('dotenv').config({ path: '../' });
+require('dotenv').config({ path: '../' });
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 
 const bodyParser = require('body-parser');
 const logger = require('./middleware/logger');
+const todoRoutes = require('./routes/todos');
 const app = express();
 
 // app.use(express.static(path.join(__dirname, 'src')));
 app.use(
   bodyParser.urlencoded({
-    extended : true
+    extended : true,
   })
 );
 
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 
 app.use(logger);
 
-app.use('/api/todos', require('../routes/api/todos'));
+app.use('/api/todos', todoRoutes);
 
 app.use((req, res, next) => {
   res.set({
@@ -25,14 +26,14 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Origin'  : '*',
     'Access-Control-Allow-Headers' :
       'Origin, X-Requested-With, Content-Type, Accept',
-    'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS, PUT, DELETE'
+    'Access-Control-Allow-Methods' : 'GET, POST, OPTIONS, PUT, DELETE',
   });
   next();
 });
 
 app.get('/', (req, res, next) => {
   res.status(400).json({
-    err : 'API calls must be in the form /api/<path>'
+    err : 'API calls must be in the form /api/<path>',
   });
   return;
 });
@@ -47,8 +48,8 @@ app.get('/api/', (req, res, next) => {
           getTodoById : 'get /todos/:id',
           createTodo  : 'post /todos',
           updateTodo  : 'put /todos/:id',
-          deleteTodo  : 'delete /todos/:id'
-        }
+          deleteTodo  : 'delete /todos/:id',
+        },
       },
       null,
       2

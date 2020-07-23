@@ -33,7 +33,7 @@ const getTodoById = (req, res) => {
       (err, result) => {
         if (err) {
           res.status(500).json({
-            err : '500 Database Error'
+            err : '500 Database Error',
           });
           return;
         }
@@ -61,14 +61,14 @@ const createTodo = (req, res) => {
     (err, result) => {
       if (err) {
         res.status(500).json({
-          err : '500 Database Error'
+          err : '500 Database Error',
         });
         return;
       }
       newTodo = {
         id        : result.rows[0].id,
         title     : title,
-        completed : complete
+        completed : complete,
       };
       console.log(newTodo);
       res.status(201).json(newTodo);
@@ -90,13 +90,13 @@ const deleteTodo = (req, res) => {
       (err, result) => {
         if (err) {
           res.status(500).json({
-            err : '500 Database Error'
+            err : '500 Database Error',
           });
         }
 
         res.status(200).json({
           msg : `todo deleted with id ${id}`,
-          id  : id
+          id  : id,
         });
       }
     );
@@ -118,7 +118,7 @@ const updateTodo = (req, res) => {
       (err, result) => {
         if (err) {
           res.status(500).json({
-            err : '500 Database Error'
+            err : '500 Database Error',
           });
           return;
         }
@@ -126,7 +126,7 @@ const updateTodo = (req, res) => {
           msg          : `Updated todo with id ${id}`,
           id           : id,
           newTodoTitle : title,
-          newComplete  : complete
+          newComplete  : complete,
         });
       }
     );
@@ -147,7 +147,7 @@ const toggleTodo = (req, res) => {
       (err, result) => {
         if (err) {
           res.status(500).json({
-            err : '500 Database Error'
+            err : '500 Database Error',
           });
           return;
         }
@@ -163,5 +163,5 @@ module.exports = {
   createTodo,
   updateTodo,
   deleteTodo,
-  toggleTodo
+  toggleTodo,
 };
