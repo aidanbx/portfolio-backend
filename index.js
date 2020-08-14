@@ -1,9 +1,12 @@
-require('dotenv').config();
-const todoApi = require('./src/todoApi');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(process.cwd(), 'api', '.env') });
+const express = require('express');
+const app = require('./api/api');
 
-const PORT = process.env.PORT || 54321;
-const HOST = process.env.IP || 'localhost';
-
-todoApi.listen(process.env.PORT, () =>
-  console.log(`todoApi running at http://${HOST}:${PORT}/api`)
+app.listen(app.get('PORT'), () =>
+  console.log(
+    `Express started on http://${app.get('IP')}:${app.get(
+      'PORT'
+    )}; press Ctrl-C to terminate.`
+  )
 );

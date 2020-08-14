@@ -1,34 +1,32 @@
 {
-  "name": "todoapi",
+  "name": "back-master",
   "version": "1.0.0",
-  "description": "Todo list API",
+  "description": "barbieux.dev backend api",
   "main": "index.js",
-  "scripts": {
-    "dev": "nodemon .",
-    "start": "pm2 start index.js --name 'todoApi'",
-    "restart": "pm2 restart 'todoApi'",
-    "stop": "pm2 stop 'todoApi'",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abarbieu/todoApi.git"
-  },
-  "author": "Aidan Barbieux",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/abarbieu/todoApi/issues"
-  },
-  "homepage": "https://github.com/abarbieu/todoApi#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "geoip-lite": "^1.4.2",
     "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31",
     "pg": "^8.2.2"
   },
-  "devDependencies": {
-    "jest": "^26.1.0",
-    "supertest": "^4.0.2"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abarbieu/abarbieux-backend.git"
+  },
+  "keywords": [
+    "\"nodejs\""
+  ],
+  "author": "\"reactjs\",",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abarbieu/abarbieux-backend/issues"
+  },
+  "homepage": "https://github.com/abarbieu/abarbieux-backend#readme"
 }

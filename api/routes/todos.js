@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../../src/queries.js');
+const db = require('../todolist/queries.js');
 
 router.get('/', db.getTodos);
 router.get('/:id', db.getTodoById);
