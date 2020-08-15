@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('./middleware/logger');
 const todoRoutes = require('./routes/todos');
-
+const mailRoutes = require('./routes/mail');
 const app = express();
 const PORT = process.env.PORT || 8080;
 const IP = process.env.IP || localhost;
@@ -26,9 +26,10 @@ app.use(
 
 app.use(bodyParser.json());
 
-app.use(logger);
+app.use(logger.logger);
 
 app.use('/api/todos', todoRoutes);
+app.use('/api/mail', mailRoutes);
 
 app.get('/api/', (req, res, next) => {
   res.send(
@@ -44,7 +45,8 @@ app.get('/api/', (req, res, next) => {
           deleteTodo  : 'delete /todos/:id',
         },
         mailCommands     : {
-          sendMail : 'post /mail/?pass=password',
+          sendMail :
+            'post /mail/?replyto=theirEmail&name=theirName&subject=&content=whatTheyTyped',
         },
       },
       null,

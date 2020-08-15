@@ -4,10 +4,17 @@ const fs = require('fs');
 const logFile = './logs.txt';
 const ipRegex = /[\d\.]+$/;
 
-const logger = (req, res, next) => {
-  if (req.originalUrl === '/' || req.originalUrl === '/index.html') {
+const getLog = (req) => {
+  let clientIP;
+  try {
+    clientIP = req.headers['x-real-ip'].match(ipRegex)[0];
+  } catch (err) {
+    clientIP = (req.headers['x-forwarded-for'] || req.connection.remoteAddress)
+      .match(ipRegex)[0];
+  }
+  if (clientIP) {
     try {
-      const clientIP = req.headers['x-real-ip'].match(ipRegex)[0];
+      console.log(clientIP);
       const geo = geoip.lookup(clientIP);
       // console.log(clientIP);
       const log = `${moment().tz(
@@ -15,6 +22,18 @@ const logger = (req, res, next) => {
       )} : ${geo.country} ${geo.region} ${geo.city} : ${req.headers[
         'x-real-ip'
       ]}`;
+      return log;
+    } catch (err) {
+      return clientIP;
+    }
+  }
+  return "Couldn't get IP addr";
+};
+
+const logger = (req, res, next) => {
+  if (req.originalUrl === '/' || req.originalUrl === '/index.html') {
+    try {
+      const log = getLog(req);
 
       fs.appendFile(logFile, log + '\n', 'utf8', (err) => {
         if (err) {
@@ -31,4 +50,4 @@ const logger = (req, res, next) => {
   next();
 };
 
-module.exports = logger;
+module.exports = { getLog, logger };
