@@ -19,7 +19,7 @@
 # Database etc. Setup:
 ---
 
-## Install postgreSQL
+## `Install postgreSQL`
 
 ```bash
 apt-get install postgresql postgresql-contrib   # install
@@ -27,7 +27,7 @@ update-rc.d postgresql enable                   # psql starts on boot
 service postgresql start                        # start psql on port 5432 (default)
 ```
 
-Setup Node.js stuff for a new project:
+## `Setup Node.js stuff for a new project:`
 -----
 
 ```bash
@@ -36,7 +36,7 @@ npm i express pg
 
 ```
 
-Basic commands to get started:
+## `Basic commands to get started:`
 -----
 
 ```bash
@@ -50,7 +50,7 @@ psql -d db -U user -W   # Enter db via user with password
 => \list                # List databases
 ```
 
-Basic SQL:
+## `Basic SQL:`
 -----
 
 ```SQL
@@ -72,7 +72,8 @@ INSERT INTO users (name, email)
 SELECT * FROM users;
 ```
 
-Basic API testing with curl:
+## `Basic API testing with curl:`
+#### I recommend using Postman instead
 -----
 
 ```bash
@@ -82,7 +83,7 @@ curl -X PUT -d "name=Kramer" -d "email=kramer@example.com" http://localhost:3000
 curl -X "DELETE" http://localhost:3000/users/1                                            # DELETE request with id 1
 ```
 
-## Template for environment variables in a .env file:
+## `Template for environment variables in a .env file:`
 
 ```python
 HOST=ip|domain|localhost
@@ -99,7 +100,7 @@ TOEMAIL=inbox@domain.ext
 DEVPASS=emailpassword
 ```
 
-Reference Guides:
+# Reference Guides:
 ----
 
 [Setting up a RESTful API with Node.js and PostgreSQL](https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/)
