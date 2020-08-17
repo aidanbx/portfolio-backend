@@ -1,4 +1,6 @@
-# abarbieux.com barbieux.dev backend API for Mail sending and note database keeping
+# Portfolio website backend API for Mail sending and note database keeping
+---
+[abarbieux.com](https://www.abarbieux.com) [barbieux.dev](https://barbieux.dev)
 ---
 ## A RESTful API to manage todolist items using a PostgreSQL database
 
