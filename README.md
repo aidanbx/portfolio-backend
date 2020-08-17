@@ -79,15 +79,18 @@ curl -X "DELETE" http://localhost:3000/users/1                                  
 ## Template for environment variables in a .env file:
 
 ```python
-HOST=localhost
-IP=ip
+HOST=ip|domain|localhost
+IP=ip|domain|localhost
 PORT=port
 PGUSER=username
 PGHOST=localhost
 PGPASSWORD=password
 PGDATABASE=database
 PGPORT=5432
-
+TODOLIST_TABLE=todolist
+DEVEMAIL=sendfromhere@domain.ext
+TOEMAIL=inbox@domain.ext
+DEVPASS=emailpassword
 ```
 
 Reference Guides:
