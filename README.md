@@ -7,7 +7,7 @@
 
 ### Front End: [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend)
 
-## Production: [portfolio-production](https://github.com/abarbieu/portfolio-production)
+### Production: [portfolio-production](https://github.com/abarbieu/portfolio-production)
 
 ## A RESTful API to:
 * Manage todolist items using a PostgreSQL database
