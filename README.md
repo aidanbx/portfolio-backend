@@ -1,23 +1,25 @@
-# Portfolio website backend API for Mail sending and note database keeping
+# Portfolio website backend API 
+
+### Websites: [abarbieux.com](https://www.abarbieux.com) || [barbieux.dev](https://barbieux.dev)
 ---
-[abarbieux.com](https://www.abarbieux.com) [barbieux.dev](https://barbieux.dev)
----
+## Related Repos
 
-### Previously: [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
+### `Previously`: [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
 
-### Front End: [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend)
+### `Front End`: [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend)
 
-### Production: [portfolio-production](https://github.com/abarbieu/portfolio-production)
+### `Production`: [portfolio-production](https://github.com/abarbieu/portfolio-production)
 
-## A RESTful API to:
-* Manage todolist items using a PostgreSQL database
-* Send email forms using nodemailer
+## Features:
+
+### `Notes Database`: Manage todolist items using a PostgreSQL database
+  
+### `Auto Mailer`: Send email forms using nodemailer
 
 # Database etc. Setup:
 ---
 
 ## Install postgreSQL
-
 
 ```bash
 apt-get install postgresql postgresql-contrib   # install
