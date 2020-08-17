@@ -2,6 +2,9 @@
 ---
 [abarbieux.com](https://www.abarbieux.com) [barbieux.dev](https://barbieux.dev)
 ---
+
+### Previously [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
+
 ## A RESTful API to:
 * Manage todolist items using a PostgreSQL database
 * Send email forms using nodemailer
