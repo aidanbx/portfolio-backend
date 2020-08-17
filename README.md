@@ -2,9 +2,9 @@
 ---
 [abarbieux.com](https://www.abarbieux.com) [barbieux.dev](https://barbieux.dev)
 ---
-## A RESTful API to manage todolist items using a PostgreSQL database
-
-## A RESTful API to send email forms using nodemailer
+## A RESTful API to:
+* Manage todolist items using a PostgreSQL database
+* Send email forms using nodemailer
 
 # Database etc. Setup:
 ---
