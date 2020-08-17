@@ -1,8 +1,10 @@
-# TodoList API
+# abarbieux.com barbieux.dev backend API for Mail sending and note database keeping
 ---
 ## A RESTful API to manage todolist items using a PostgreSQL database
 
-# Setup:
+## A RESTful API to send email forms using nodemailer
+
+# Database etc. Setup:
 ---
 
 ## Install postgreSQL
@@ -80,6 +82,7 @@ PGHOST=localhost
 PGPASSWORD=password
 PGDATABASE=database
 PGPORT=5432
+
 ```
 
 Reference Guides:
