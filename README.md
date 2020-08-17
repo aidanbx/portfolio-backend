@@ -3,7 +3,11 @@
 [abarbieux.com](https://www.abarbieux.com) [barbieux.dev](https://barbieux.dev)
 ---
 
-### Previously [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
+### Previously: [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
+
+### Front End: [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend)
+
+## Production: [portfolio-production](https://github.com/abarbieu/portfolio-production)
 
 ## A RESTful API to:
 * Manage todolist items using a PostgreSQL database
