@@ -1,20 +1,20 @@
-# Portfolio website backend API 
+# Portfolio Website Backend REST API 
 
-### Websites: [abarbieux.com](https://www.abarbieux.com) || [barbieux.dev](https://barbieux.dev)
+>### Websites: [abarbieux.com](https://www.abarbieux.com) || [barbieux.dev](https://barbieux.dev)
 ---
 ## Related Repos
 
-### `Previously`: [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
+>### `Previously:` [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
 
-### `Front End`: [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend)
+>### `Front End:` [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend)
 
-### `Production`: [portfolio-production](https://github.com/abarbieu/portfolio-production)
+>### `Production:` [portfolio-production](https://github.com/abarbieu/portfolio-production)
 
 ## Features:
 
-### `Notes Database`: Manage todolist items using a PostgreSQL database
+>### `Notes Database:` Manage todolist items using a PostgreSQL database
   
-### `Auto Mailer`: Send email forms using nodemailer
+>### `Auto Mailer:` Send email forms using nodemailer
 
 # Database etc. Setup:
 ---
