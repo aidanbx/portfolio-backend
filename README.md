@@ -1,6 +1,6 @@
 # Portfolio Website Backend REST API 
 
-A backend interface hosting RESTful APIs and logging middleware, built with NodeJS, Express, and 
+A backend interface hosting RESTful APIs and logging middleware, built with NodeJS, Express, and PostgreSQL
 
 ### `Websites:`
 
