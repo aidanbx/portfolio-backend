@@ -1,4 +1,4 @@
-# Portfolio Website Backend REST API 
+# Portfolio Website Backend API
 
 A backend interface hosting RESTful APIs and logging middleware, built with NodeJS, Express, and PostgreSQL
 
