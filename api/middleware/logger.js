@@ -55,6 +55,7 @@ const logger = (req, res, next, logs) => {
 
 	try {
 		logs[log.ip] = logs[log.ip] || {};
+		logs[log.ip].geo = log.geo;
 		logs[log.ip][log.path] = logs[log.ip][log.path] || [];
 		logs[log.ip][log.path].push({
 			time: log.time,
