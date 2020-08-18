@@ -24,15 +24,15 @@ A backend interface hosting RESTful APIs and logging middleware, built with Node
 
 ## Features:
 
-### [`Notes Database:`](#todolist-api)
+### [`Notes Database:`](#Todolist-API)
 
 Manage todolist items using a PostgreSQL database
   
-### [`Auto Mailer:`](#auto-mailer)
+### [`Auto Mailer:`](#Auto-Mailer)
 
 Send email forms using nodemailer
 
-### [`Logging Middleware:`](#logger)
+### [`Logging Middleware:`](#Logger)
 
 Middleware that saves all visits to a logs file containing **time, location and IP** information
 
