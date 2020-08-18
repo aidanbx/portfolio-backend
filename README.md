@@ -1,22 +1,65 @@
 # Portfolio Website Backend REST API 
 
->### Websites: [abarbieux.com](https://www.abarbieux.com) || [barbieux.dev](https://barbieux.dev)
+A backend interface hosting RESTful APIs and logging middleware, built with NodeJS, Express, and 
+
+### `Websites:`
+
+[abarbieux.com](https://www.abarbieux.com) || [barbieux.dev](https://barbieux.dev) Both currently point to the same source
+
 ---
 ## Related Repos
 
->### `Previously:` [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground)
 
->### `Front End:` [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend)
+### `Front End:`
 
->### `Production:` [portfolio-production](https://github.com/abarbieu/portfolio-production)
+[portfolio-frontend](https://github.com/abarbieu/portfolio-frontend) ~ The front end of a fully fledged portfolio website built with ReactJS in Typescript. Includes scripts and components that automatically generate content from photo folders, JSON files, and a back end interface.
+
+### `Production:`
+
+[portfolio-production](https://github.com/abarbieu/portfolio-production) ~ Where optimized frontend and backend projects are combined and served with different routes and middleware.
+
+### `Previously:`
+
+[postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground) ~ A place to test database design and commands
 
 ## Features:
 
->### `Notes Database:` Manage todolist items using a PostgreSQL database
-  
->### `Auto Mailer:` Send email forms using nodemailer
+### [`Notes Database:`](#todolist-api)
 
-# Database etc. Setup:
+Manage todolist items using a PostgreSQL database
+  
+### [`Auto Mailer:`](#auto-mailer)
+
+Send email forms using nodemailer
+
+### [`Logging Middleware:`](#logger)
+
+Middleware that saves all visits to a logs file containing **time, location and IP** information
+
+---
+
+## Todolist Api
+
+### `Features:`
+
+### `Purpose:`
+
+## Auto Mailer
+
+### `Features:`
+
+### `Purpose:`
+
+## Logger
+
+### `Features:`
+
+### `Purpose:`
+
+### `Considerations:`
+
+---
+# Database and General Setup:
 ---
 
 ## `Install postgreSQL`
