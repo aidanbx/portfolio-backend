@@ -292,6 +292,10 @@
       {
         "time": "Sun Aug 30 2020 11:59:54 GMT-0700",
         "loc": "POST http://barbieux.dev/api/mail"
+      },
+      {
+        "time": "Sun Aug 30 2020 12:03:40 GMT-0700",
+        "loc": "POST http://barbieux.dev/api/mail"
       }
     ]
   }

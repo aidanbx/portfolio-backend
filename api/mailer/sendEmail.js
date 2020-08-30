@@ -20,18 +20,6 @@ var transporter = nodemailer.createTransport({
     clientSecret: clsec,
     refreshToken: refrtok,
   }
-  // host: 'mail.privateemail.com',
-  // srcure: true,
-  // port: 465,
-  // auth: {
-  //   user: from,
-  //   pass: password
-  // }
-  // dkim: {
-  //   domainName: 'privateemail.com',
-  //   keySelector: '2020',
-  //   privateKey: '',
-  // }
 });
 
 sendEmail = async (req, res) => {
@@ -50,15 +38,108 @@ sendEmail = async (req, res) => {
   if (!content) content = 'No Content';
 
   const info = await transporter.sendMail({
-    from: `"${name}" <${from}>`,
+    from: `"${name}" <mailer@barbieux.dev>`,
     to: `${to}`,
     subject: `${subject}`,
-    html: `<h3>${name}</h3>
-    <h4>${subject}</h4>
-    <p>${content}</p>
-    <p>Reply To: <b>${replyto}</b></p>
-    <p>Sent From: <b>${log}</b></p>`
-    // text    : `${name}\nSent from:\n${log} Content:\n\n${content}\n\n\nReply To:\n\t${replyto}`,
+    html: `
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <style>
+      .Tiled-back {
+        min-height: 100vh;
+        background: url('https://barbieux.dev/bg-pblue-str.png');
+        overflow-x: hidden;
+        background-repeat: round;
+        background-size: 64px;
+      }
+
+      .table-header {
+        vertical-align: top;
+        font-family: "Source Code Pro", monospace;
+        padding: 11px;
+        border-bottom: 1px solid rgb(227, 227, 218);
+        font-size: 14px
+      }
+    </style>
+  </head>
+
+  <body class="Tiled-back">
+    <div bgcolor="#ffffff" height="100%" width="100%">
+
+
+      <table class="Tiled-back" style="width:100%;margin:0px auto" width="100%">
+        <tbody>
+          <tr>
+            <td valign="top" align="center" style="vertical-align:top">
+              <table style="width:100%" width="100%">
+                <tbody>
+                  <tr>
+                    <td align="center" style="vertical-align:top;color:rgb(16,55,66);padding:22px" valign="top">
+                      <div>
+                        <img src="https://barbieux.dev/icons/sherbert.svg" alt="Sherbert" width="66px" height="66px"
+                          style="max-width:100%;margin-bottom:22px">
+                      </div>
+                      <p
+                        style="color:white;font-weight:700;font-family:Poppins,sans-serif;margin:0px;text-transform:uppercase">
+                        ${name} Sent a message</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table style="width:100%;background-color:white;max-width:616px;">
+                <tbody>
+                  <tr>
+                    <td valign="top">
+                      <table style="width:100%;">
+
+                        <tbody>
+                        <tr>
+                            <td class="table-header" valign="top">
+                              <strong>name:</strong><br>
+                              <pre>${name}</pre>
+                            </td >
+                          </tr >
+                          <tr>
+                            <td class="table-header" valign="top">
+                              <strong>email:</strong><br>
+                              <pre>${replyto}</pre>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="table-header" valign="top">
+                              <strong>subject:</strong><br>
+                              <pre>${subject}</pre>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="table-header" valign="top">
+                              <strong>message:</strong><br>
+                              <pre>${content}</pre>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr align="center" style="padding:0px 0px 22px">
+                    <td style="padding:11px;">
+                      <span style="color:rgb(145,143,141);font-size:12px">${JSON.stringify(log, null, 2)}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+</html>
+    `
   });
 
   res.status(200).json({
