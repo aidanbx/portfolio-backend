@@ -167,5 +167,132 @@
         "loc": "GET http://127.0.0.1/api/"
       }
     ]
+  },
+  "68.107.40.82": {
+    "geo": {
+      "range": [
+        1147873280,
+        1147875327
+      ],
+      "country": "US",
+      "region": "CA",
+      "eu": "0",
+      "timezone": "America/Los_Angeles",
+      "city": "San Diego",
+      "ll": [
+        32.7203,
+        -117.1552
+      ],
+      "metro": 825,
+      "area": 5
+    },
+    "/": [
+      {
+        "time": "Sun Aug 30 2020 10:47:42 GMT-0700",
+        "loc": "GET http://barbieux.dev/"
+      },
+      {
+        "time": "Sun Aug 30 2020 10:48:20 GMT-0700",
+        "loc": "GET http://barbieux.dev/"
+      },
+      {
+        "time": "Sun Aug 30 2020 10:48:33 GMT-0700",
+        "loc": "GET http://barbieux.dev/"
+      }
+    ],
+    "/api/mail": [
+      {
+        "time": "Sun Aug 30 2020 10:47:47 GMT-0700",
+        "loc": "GET http://barbieux.dev/api/mail"
+      }
+    ],
+    "/api/": [
+      {
+        "time": "Sun Aug 30 2020 10:47:51 GMT-0700",
+        "loc": "GET http://barbieux.dev/api/"
+      }
+    ],
+    "/api": [
+      {
+        "time": "Sun Aug 30 2020 10:48:44 GMT-0700",
+        "loc": "GET http://barbieux.dev/api"
+      },
+      {
+        "time": "Sun Aug 30 2020 11:52:11 GMT-0700",
+        "loc": "GET http://barbieux.dev/api"
+      }
+    ],
+    "/favicon.ico": [
+      {
+        "time": "Sun Aug 30 2020 11:52:12 GMT-0700",
+        "loc": "GET http://barbieux.dev/favicon.ico"
+      }
+    ]
+  },
+  "51.159.23.43": {
+    "geo": {
+      "range": [
+        866058240,
+        866123775
+      ],
+      "country": "FR",
+      "region": "IDF",
+      "eu": "1",
+      "timezone": "Europe/Paris",
+      "city": "Paris",
+      "ll": [
+        48.8607,
+        2.3281
+      ],
+      "metro": 0,
+      "area": 500
+    },
+    "/": [
+      {
+        "time": "Sun Aug 30 2020 11:30:10 GMT-0700",
+        "loc": "GET http://138.68.14.76/"
+      }
+    ]
+  },
+  "138.68.14.76": {
+    "geo": {
+      "range": [
+        2319712256,
+        2319720447
+      ],
+      "country": "US",
+      "region": "CA",
+      "eu": "0",
+      "timezone": "America/Los_Angeles",
+      "city": "Santa Clara",
+      "ll": [
+        37.3417,
+        -121.9753
+      ],
+      "metro": 807,
+      "area": 1000
+    },
+    "/api/mail": [
+      {
+        "time": "Sun Aug 30 2020 11:49:31 GMT-0700",
+        "loc": "POST http://barbieux.dev/api/mail"
+      },
+      {
+        "time": "Sun Aug 30 2020 11:51:58 GMT-0700",
+        "loc": "POST http://barbieux.dev/api/mail"
+      },
+      {
+        "time": "Sun Aug 30 2020 11:56:42 GMT-0700",
+        "loc": "POST http://barbieux.dev/api/mail"
+      },
+      {
+        "time": "Sun Aug 30 2020 11:57:17 GMT-0700",
+        "loc": "POST http://barbieux.dev/api/mail"
+      },
+      {
+        "time": "Sun Aug 30 2020 11:59:54 GMT-0700",
+        "loc": "POST http://barbieux.dev/api/mail"
+      }
+    ]
   }
 }

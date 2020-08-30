@@ -10,14 +10,15 @@ const to = process.env.TOEMAIL;
 const logs = require('../../logs.json');
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    xoauth2: xoauth2.createXOAuth2Generator({
-      user: from,
-      clientId: clid,
-      clientSecret: clsec,
-      refreshToken: refrtok
-    })
+    type: 'OAuth2',
+    user: from,
+    clientId: clid,
+    clientSecret: clsec,
+    refreshToken: refrtok,
   }
   // host: 'mail.privateemail.com',
   // srcure: true,
@@ -34,6 +35,12 @@ var transporter = nodemailer.createTransport({
 });
 
 sendEmail = async (req, res) => {
+  console.log({
+    user: from,
+    clientId: clid,
+    clientSecret: clsec,
+    refreshToken: refrtok,
+  });
   let { replyto, subject, name, content } = req.body;
 
   const log = logs[logger.getIP(req)];
