@@ -127,8 +127,7 @@ sendEmail = async (req, res) => {
                   </tr>
                   <tr align="center" style="padding:0px 0px 22px">
                     <td style="padding:11px;">
-                      <span style="color:rgb(145,143,141);font-size:12px">${`${log.geo.country} ${log.geo.region} ${log.geo.city} --- ${log.time}`
-                      )}</span>
+                      <span style="color:rgb(145,143,141);font-size:12px">${log.geo.country} ${log.geo.region} ${log.geo.city} --- ${log.time}</span>
                     </td>
                   </tr>
                 </tbody>
