@@ -19,10 +19,15 @@ app.use((req, res, next) => {
 
   next();
 });
-// app.use('/api/', (req, res, next) => {
-//   res.header('Content-Type', 'application/json');
-//   next();
-// });
+
+//! redirect
+app.use('/*', (req, res, next) => {
+  const log = logger.makeLog(req);
+  if (log.domain === 'abarbieux.com') {
+    res.redirect(301, 'https://barbieux.dev' + log.url);
+  }
+  next();
+});
 
 app.use(
   bodyParser.urlencoded({

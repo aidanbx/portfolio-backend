@@ -7,62 +7,96 @@ A backend interface hosting RESTful APIs and logging middleware, built with Node
 [abarbieux.com](https://www.abarbieux.com) || [barbieux.dev](https://barbieux.dev) Both currently point to the same source
 
 ---
+## Contents:
+
+  1. [Related Repos](#Related-Repos)
+  2. [Features](#Features)
+     1. [Todolist REST API](#Todolist-API)
+     2. [Mailer API](#Mailer-API)
+     3. [Request Logger](#Request-Logger)
+
+---
+
 ## Related Repos
 
 
-### `Front End:`
+* #### `Front End:`
 
-[portfolio-frontend](https://github.com/abarbieu/portfolio-frontend) ~ The front end of a fully fledged portfolio website built with ReactJS in Typescript. Includes scripts and components that automatically generate content from photo folders, JSON files, and a back end interface.
+  * [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend) ~ The front end of a fully fledged portfolio website built with ReactJS in Typescript. Includes scripts and components that automatically generate content from photo folders, JSON files, and a back end interface.
 
-### `Production:`
+* #### `Production:`
 
-[portfolio-production](https://github.com/abarbieu/portfolio-production) ~ Where optimized frontend and backend projects are combined and served with different routes and middleware.
+  * [portfolio-production](https://github.com/abarbieu/portfolio-production) ~ Where optimized frontend and backend projects are combined and served with different routes and middleware.
 
-### `Previously:`
+* #### `Previously:`
 
-[postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground) ~ A place to test database design and commands
+  * [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground) ~ A place to test database design and commands
 
 ## Features:
 
-### [`Notes Database:`](#Todolist-API)
+* #### [`Notes Database:`](#Todolist-API)
 
-Manage todolist items using a PostgreSQL database
+  * Manage todolist items using a PostgreSQL database
   
-### [`Auto Mailer:`](#Auto-Mailer)
+* #### [`Auto Mailer:`](#Mailer-API)
 
-Send email forms using nodemailer
+  * Send email forms using nodemailer
 
-### [`Logging Middleware:`](#Logger)
+* #### [`Logging Middleware:`](#Request-Logger)
 
-Middleware that saves all visits to a logs file containing **time, location and IP** information
+  * Middleware that saves all visits to a logs file containing **time, location, and IP** information
 
 ---
 
 ## Todolist Api
-
+---
 ### `Features:`
 
-### `Purpose:`
+Simple REST API commands:
 
-## Auto Mailer
+All data should be sent in url encoded format
 
-### `Features:`
+* `GET @/api/todos` 
+  * Returns all todos in database in the form 
+    ```ts 
+    [{ id: String, title: String, complete: Boolean }]
+    ```
+* `GET @/api/todos/:id`
+  * Returns single todo with provided id in the form: 
+    ```ts 
+    { id: String, title: String, complete: Boolean }
+    ```
+* `POST @/api/todos/?title=String&complete=Boolean `
+  * Creates a single todo with provided data, returns todo 
+* `PUT @/api/todos/:id`
+  * Updates a todo with given id, only toggling complete
+* `DELETE @/api/todos/:id`
+  * Deletes todo with given id
 
-### `Purpose:`
 
-## Logger
+(@ represents barbieux.dev, replace datatype after '=' with your data)
 
-### `Features:`
+#### `Purpose:`
 
-### `Purpose:`
+## Mailer API
 
-### `Considerations:`
+#### `Features:`
+
+#### `Purpose:`
+
+## request Logger
+
+#### `Features:`
+
+#### `Purpose:`
+
+#### `Considerations:`
 
 ---
 # Database and General Setup:
 ---
 
-## `Install postgreSQL`
+### `Install postgreSQL`
 
 ```bash
 apt-get install postgresql postgresql-contrib   # install
@@ -70,7 +104,7 @@ update-rc.d postgresql enable                   # psql starts on boot
 service postgresql start                        # start psql on port 5432 (default)
 ```
 
-## `Setup Node.js stuff for a new project:`
+### `Setup Node.js stuff for a new project:`
 -----
 
 ```bash
@@ -79,7 +113,7 @@ npm i express pg
 
 ```
 
-## `Basic commands to get started:`
+### `Basic commands to get started:`
 -----
 
 ```bash
@@ -93,7 +127,7 @@ psql -d db -U user -W   # Enter db via user with password
 => \list                # List databases
 ```
 
-## `Basic SQL:`
+### `Basic SQL:`
 -----
 
 ```SQL
@@ -115,8 +149,8 @@ INSERT INTO users (name, email)
 SELECT * FROM users;
 ```
 
-## `Basic API testing with curl:`
-#### I recommend using Postman instead
+### `Basic API testing with curl:`
+##### I recommend using [postman](https://www.postman.com/) instead
 -----
 
 ```bash
@@ -126,7 +160,7 @@ curl -X PUT -d "name=Kramer" -d "email=kramer@example.com" http://localhost:3000
 curl -X "DELETE" http://localhost:3000/users/1                                            # DELETE request with id 1
 ```
 
-## `Template for environment variables in a .env file:`
+### `Template for environment variables in a .env file:`
 
 ```python
 HOST=ip|domain|localhost

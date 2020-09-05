@@ -1,7 +1,6 @@
 require('dotenv').config({ path: '../' });
 const nodemailer = require('nodemailer');
 const logger = require('../middleware/logger');
-const xoauth2 = require('xoauth2');
 const clid = process.env.CLIENTID;
 const clsec = process.env.CLIENTSECRET;
 const refrtok = process.env.REFRESHTOKEN;
