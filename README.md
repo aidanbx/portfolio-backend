@@ -4,7 +4,7 @@ A backend interface hosting RESTful APIs and logging middleware, built with Node
 
 ### `Websites:`
 
-[abarbieux.com](https://www.abarbieux.com) || [barbieux.dev](https://barbieux.dev) Both currently point to the same source
+[abarbieux.com/api/](https://www.abarbieux.com/api/) || [barbieux.dev/api/](https://barbieux.dev/api/) Both currently point to the same source
 
 ---
 ## Contents:
@@ -14,6 +14,8 @@ A backend interface hosting RESTful APIs and logging middleware, built with Node
      1. [Todolist REST API](#Todolist-API)
      2. [Mailer API](#Mailer-API)
      3. [Request Logger](#Request-Logger)
+  3. [Setup](#Database-and-General-Setup)
+  4. [Reference Guides](#Reference-Guides)
 
 ---
 
@@ -47,7 +49,7 @@ A backend interface hosting RESTful APIs and logging middleware, built with Node
   * Middleware that saves all visits to a logs file containing **time, location, and IP** information
 
 ---
-
+---
 ## Todolist Api
 ---
 ### `Features:`
@@ -74,24 +76,52 @@ All data should be sent in url encoded format
   * Deletes todo with given id
 
 
-(@ represents barbieux.dev, replace datatype after '=' with your data)
+(@ represents https://barbieux.dev, replace datatype after '=' with your data)
 
 #### `Purpose:`
 
+This API is meant purely to manage the <https://barbieux.dev/notes/> page
+
+---
 ## Mailer API
-
+---
 #### `Features:`
+
+Request format:
+
+```ts
+POST @/mail/?replyto=String&name=String&subject=String&content=String
+```
+
+(@ represents https://barbieux.dev, replace datatype after '=' with your data)
 
 #### `Purpose:`
 
-## request Logger
+This utility is used to contact me through a form displayed in a Contact Me Modal
 
+---
+## Request Logger
+---
 #### `Features:`
+
+Logs all http requests to my website to a postgres database indexed by IP address.
+
+The following information is recorded:
+
+* IP address
+* Time requested
+* Request protocol, method, domain, path, subdomains
+* Geographic information
+  * **Not accurate enough to be a privacy concern**
+  * Rough Latitude/Longitude coordinates
+  * Corresponding Country, Region, City
+  * Area Code, Metro Code
 
 #### `Purpose:`
 
-#### `Considerations:`
+To quantify traffic and reach, indentify malicious requests, and for some debugging
 
+---
 ---
 # Database and General Setup:
 ---

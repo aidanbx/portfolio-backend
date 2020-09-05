@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 //! redirect
 app.use('/*', (req, res, next) => {
   const log = logger.makeLog(req);
-  if (log.domain === 'abarbieux.com') {
+  if (log.domain === 'abarbieux.com' || log.domain === 'www.abarbieux.com') {
     res.redirect(301, 'https://barbieux.dev' + log.url);
   }
   next();
