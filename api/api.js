@@ -13,22 +13,27 @@ app.set('PORT', PORT);
 app.set('IP', IP);
 
 app.use((req, res, next) => {
-	res.append('Access-Control-Allow-Origin', [ '*' ]);
-	res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-	res.append('Access-Control-Allow-Headers', 'Content-Type');
-	next();
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+
+  next();
 });
+// app.use('/api/', (req, res, next) => {
+//   res.header('Content-Type', 'application/json');
+//   next();
+// });
 
 app.use(
-	bodyParser.urlencoded({
-		extended: true
-	})
+  bodyParser.urlencoded({
+    extended: true,
+  })
 );
 
 app.use(bodyParser.json());
 
 const logWrapper = (req, res, next) => {
-	return logger.logger(req, res, next, logs);
+  return logger.logger(req, res, next, logs);
 };
 
 app.use(logWrapper);
@@ -38,20 +43,28 @@ app.use('/api/mail', mailRoutes);
 // app.set('json spaces', 2);
 app.set('view options', { pretty: true });
 app.get('/api/', (req, res, next) => {
-	res.status(200).json({
-		title: 'abarbieux.com REST API',
-		todoListCommands: {
-			prefix: '/api/',
-			getTodos: 'get /todos',
-			getTodoById: 'get /todos/:id',
-			createTodo: 'post /todos/?title=title&complete=checked',
-			updateTodo: 'put /todos/:id',
-			deleteTodo: 'delete /todos/:id'
-		},
-		mailCommands: {
-			sendMail: 'post /mail/?replyto=theirEmail&name=theirName&subject=&content=whatTheyTyped'
-		}
-	});
+  res.header('Content-Type', 'application/json');
+  res.status(200).send(
+    JSON.stringify(
+      {
+        title: 'barbieux.dev REST API',
+        todoListCommands: {
+          prefix: '/api/',
+          getTodos: 'get /todos',
+          getTodoById: 'get /todos/:id',
+          createTodo: 'post /todos/?title=title&complete=checked',
+          updateTodo: 'put /todos/:id',
+          deleteTodo: 'delete /todos/:id',
+        },
+        mailCommands: {
+          sendMail:
+            'post /mail/?replyto=theirEmail&name=theirName&subject=&content=whatTheyTyped',
+        },
+      },
+      null,
+      2
+    )
+  );
 });
 
 module.exports = app;
