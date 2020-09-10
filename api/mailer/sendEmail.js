@@ -147,6 +147,7 @@ sendEmail = async (req, res) => {
       if (err) {
         console.error(err);
       } else {
+        console.log(attachments);
         res.status(200).json({
           status      : 'Sent Email!, updated msg',
           from        : `${log.country} ${log.region} ${log.city}`,
