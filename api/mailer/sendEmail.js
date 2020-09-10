@@ -9,26 +9,26 @@ const to = process.env.TOEMAIL;
 const logs = require('../../logs.json');
 
 var transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    type: 'OAuth2',
-    user: from,
-    clientId: clid,
-    clientSecret: clsec,
-    refreshToken: refrtok,
+  host   : 'smtp.gmail.com',
+  port   : 465,
+  secure : true,
+  auth   : {
+    type         : 'OAuth2',
+    user         : from,
+    clientId     : clid,
+    clientSecret : clsec,
+    refreshToken : refrtok,
   },
 });
 
 sendEmail = async (req, res) => {
   console.log({
-    user: from,
-    clientId: clid,
-    clientSecret: clsec,
-    refreshToken: refrtok,
+    user         : from,
+    clientId     : clid,
+    clientSecret : clsec,
+    refreshToken : refrtok,
   });
-  let { replyto, subject, name, content } = req.body;
+  let { replyto, subject, name, content, attachments } = req.body;
 
   const log = logs[logger.getIP(req)];
   if (!replyto) replyto = 'No Return Address';
@@ -38,10 +38,10 @@ sendEmail = async (req, res) => {
 
   transporter.sendMail(
     {
-      from: `"${name}" <mailer@barbieux.dev>`,
-      to: `${to}`,
-      subject: `${subject}`,
-      html: `
+      from    : `"${name}" <mailer@barbieux.dev>`,
+      to      : `${to}`,
+      subject : `${subject}`,
+      html    : `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -126,11 +126,9 @@ sendEmail = async (req, res) => {
                   </tr>
                   <tr align="center" style="padding:0px 0px 22px">
                     <td style="padding:11px;">
-                      <span style="color:rgb(145,143,141);font-size:12px">${
-                        log.geo.country
-                      } ${log.geo.region} ${log.geo.city} --- ${
-        log.time
-      } --- ${logger.getIP(req)}</span>
+                      <span style="color:rgb(145,143,141);font-size:12px">${log
+                        .geo.country} ${log.geo.region} ${log.geo
+        .city} --- ${log.time} --- ${logger.getIP(req)}</span>
                     </td>
                   </tr>
                 </tbody>
@@ -150,14 +148,15 @@ sendEmail = async (req, res) => {
         console.error(err);
       } else {
         res.status(200).json({
-          status: 'Sent Email!, updated msg',
-          from: `${log.country} ${log.region} ${log.city}`,
-          time: `${log.time}`,
+          status      : 'Sent Email!, updated msg',
+          from        : `${log.country} ${log.region} ${log.city}`,
+          time        : `${log.time}`,
           subject,
           name,
           content,
           replyto,
-          emailid: info,
+          emailid     : info,
+          attachments,
         });
       }
     }
