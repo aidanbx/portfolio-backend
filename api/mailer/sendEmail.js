@@ -22,14 +22,8 @@ var transporter = nodemailer.createTransport({
 });
 
 sendEmail = async (req, res) => {
-  console.log({
-    user         : from,
-    clientId     : clid,
-    clientSecret : clsec,
-    refreshToken : refrtok,
-  });
   let { replyto, subject, name, content, attachments } = req.body;
-
+  console.log('sending attachments: ', attachments);
   const log = logs[logger.getIP(req)];
   if (!replyto) replyto = 'No Return Address';
   if (!subject) subject = 'No Subject';
@@ -38,10 +32,10 @@ sendEmail = async (req, res) => {
 
   transporter.sendMail(
     {
-      from    : `"${name}" <mailer@barbieux.dev>`,
-      to      : `${to}`,
-      subject : `${subject}`,
-      html    : `
+      from        : `"${name}" <mailer@barbieux.dev>`,
+      to          : `${to}`,
+      subject     : `${subject}`,
+      html        : `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,12 +136,17 @@ sendEmail = async (req, res) => {
 
 </html>
     `,
+      attachments : attachments.map((attch) => ({
+        filename : attch.filename,
+        content  : new Buffer.from(attch.raw.split('base62,')[1], 'base64'),
+      })),
     },
     (err, info) => {
       if (err) {
+        console.log('ERROR SENDING MAIL');
         console.error(err);
       } else {
-        console.log(attachments);
+        console.log('SENT MAIL!');
         res.status(200).json({
           status      : 'Sent Email!, updated msg',
           from        : `${log.country} ${log.region} ${log.city}`,
