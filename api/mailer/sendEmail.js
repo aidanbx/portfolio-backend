@@ -23,7 +23,6 @@ var transporter = nodemailer.createTransport({
 
 sendEmail = async (req, res) => {
   let { replyto, subject, name, content, attachments } = req.body;
-  console.log('sending attchs: ', attachments);
   const log = logs[logger.getIP(req)];
   if (!replyto) replyto = 'No Return Address';
   if (!subject) subject = 'No Subject';

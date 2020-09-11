@@ -13,7 +13,7 @@ app.set('PORT', PORT);
 app.set('IP', IP);
 
 app.use((req, res, next) => {
-  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Origin', [ '*' ]);
   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.append('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -31,11 +31,11 @@ app.use('/*', (req, res, next) => {
 
 app.use(
   bodyParser.urlencoded({
-    extended: true,
+    extended : true,
   })
 );
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '500mb' }));
 
 const logWrapper = (req, res, next) => {
   return logger.logger(req, res, next, logs);
@@ -52,17 +52,17 @@ app.get('/api/', (req, res, next) => {
   res.status(200).send(
     JSON.stringify(
       {
-        title: 'barbieux.dev REST API',
-        todoListCommands: {
-          prefix: '/api/',
-          getTodos: 'get /todos',
-          getTodoById: 'get /todos/:id',
-          createTodo: 'post /todos/?title=title&complete=checked',
-          updateTodo: 'put /todos/:id',
-          deleteTodo: 'delete /todos/:id',
+        title            : 'barbieux.dev REST API',
+        todoListCommands : {
+          prefix      : '/api/',
+          getTodos    : 'get /todos',
+          getTodoById : 'get /todos/:id',
+          createTodo  : 'post /todos/?title=title&complete=checked',
+          updateTodo  : 'put /todos/:id',
+          deleteTodo  : 'delete /todos/:id',
         },
-        mailCommands: {
-          sendMail:
+        mailCommands     : {
+          sendMail :
             'post /mail/?replyto=theirEmail&name=theirName&subject=&content=whatTheyTyped',
         },
       },
