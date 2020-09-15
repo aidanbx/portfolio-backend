@@ -27,7 +27,6 @@ const getIP = (req) => {
 const makeLog = (req) => {
   let clientIP;
   let log = {};
-  let tmpIP;
   try {
     log.time = `${moment().tz('America/Los_Angeles')}`;
     log.method = req.method;
@@ -36,6 +35,7 @@ const makeLog = (req) => {
     log.protocol = req.protocol;
     log.url = req.originalUrl;
     log.subdomains = req.subdomains;
+    log.body = req.body;
   } catch (err) {
     log[err] = err;
   }
@@ -56,7 +56,7 @@ const makeLog = (req) => {
 const logger = (req, res, next, logs) => {
   const basePath = req.path.match(firstPathRegex);
   let badPaths = {};
-  ['photos', 'ceramics', 'icons'].map((badPath) => {
+  [ 'photos', 'ceramics', 'icons' ].map((badPath) => {
     badPaths[badPath] = 0;
   });
   if (!basePath || !badPaths.hasOwnProperty(basePath[1])) {
@@ -68,8 +68,9 @@ const logger = (req, res, next, logs) => {
       logs[log.ip].geo = log.geo;
       logs[log.ip][log.path] = logs[log.ip][log.path] || [];
       logs[log.ip][log.path].push({
-        time: log.time,
-        loc: `${log.method} ${req.protocol}://${req.hostname}${req.path}`,
+        time : log.time,
+        body : log.body,
+        loc  : `${log.method} ${req.protocol}://${req.hostname}${req.path}`,
       });
       fs.writeFile(
         './logs.json',

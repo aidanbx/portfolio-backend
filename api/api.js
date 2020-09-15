@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require('./middleware/logger');
-const todoRoutes = require('./routes/todos');
+const notesRoutes = require('./routes/notes');
 const mailRoutes = require('./routes/mail');
 const logs = require('../logs.json');
 const app = express();
@@ -43,7 +43,7 @@ const logWrapper = (req, res, next) => {
 
 app.use(logWrapper);
 
-app.use('/api/todos', todoRoutes);
+app.use('/api/notes', notesRoutes);
 app.use('/api/mail', mailRoutes);
 // app.set('json spaces', 2);
 app.set('view options', { pretty: true });
@@ -54,12 +54,7 @@ app.get('/api/', (req, res, next) => {
       {
         title            : 'barbieux.dev REST API',
         todoListCommands : {
-          prefix      : '/api/',
-          getTodos    : 'get /todos',
-          getTodoById : 'get /todos/:id',
-          createTodo  : 'post /todos/?title=title&complete=checked',
-          updateTodo  : 'put /todos/:id',
-          deleteTodo  : 'delete /todos/:id',
+          prefix : '/api/',
         },
         mailCommands     : {
           sendMail :
