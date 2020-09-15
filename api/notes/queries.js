@@ -48,16 +48,14 @@ const getNoteById = (req, res) => {
 
 // POST /api/Notes title=random title&complete=false
 const createNote = (req, res) => {
-  let { title, content, date, archived, expanded } = req.body;
+  let { title, content, date, archived } = req.body;
   title = title || 'No Title';
   content = content || 'No Content';
   date = date || moment().unix();
   archived = archived || false;
-  expanded = expanded || false;
-  console.log('creating ', title, content);
   pool.query(
-    `INSERT INTO ${notesTable} ( title, content, date, archived, expanded ) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-    [ title, content, date, archived, expanded ],
+    `INSERT INTO ${notesTable} ( title, content, date, archived ) VALUES ($1, $2, $3, $4) RETURNING *`,
+    [ title, content, date, archived ],
     (err, result) => {
       if (err) {
         res.status(500).json({
@@ -104,7 +102,7 @@ const deleteNote = (req, res) => {
 const updateNote = (req, res) => {
   const id = parseInt(req.params.id);
   let oldNote;
-  let { title, content, date, archived, expanded } = req.body;
+  let { title, content, date, archived } = req.body;
 
   if (Number.isNaN(id)) {
     res.status(400).json({ err: 'BAD REQUEST: id must be an int' });
@@ -126,12 +124,11 @@ const updateNote = (req, res) => {
         content = content || oldNote.content;
         date = date || moment().unix();
         archived = archived || oldNote.archived;
-        expanded = expanded || oldNote.expanded;
       }
     );
     pool.query(
-      `UPDATE ${notesTable} SET title = ($1), content = ($2), date = ($3), archived = ($4), expanded = ($5) RETURNING *`,
-      [ title, content, date, archived, expanded ],
+      `UPDATE ${notesTable} SET title = ($1), content = ($2), date = ($3), archived = ($4) RETURNING *`,
+      [ title, content, date, archived ],
       (err, result) => {
         if (err) {
           res.status(500).json({
