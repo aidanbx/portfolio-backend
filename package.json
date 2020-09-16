@@ -4,6 +4,7 @@
   "description": "barbieux.dev backend api",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.20.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -16,7 +17,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --ignore logs.json --exec node index.js"
   },
   "repository": {
     "type": "git",
