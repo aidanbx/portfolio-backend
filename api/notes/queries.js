@@ -9,18 +9,21 @@ const notesTable = process.env.NOTE_TABLE || 'notes';
 
 // GET /api/notes gets all notes in db
 const getNotes = (req, res) => {
-  pool.query(`SELECT * FROM ${notesTable} ORDER BY date ASC`, (err, result) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({
-        msg     : '500 Database Error',
-        err     : err,
-        summary : { name: err.name, message: err.message },
-      });
-      return;
+  pool.query(
+    `SELECT * FROM ${notesTable} ORDER BY date DESC`,
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({
+          msg     : '500 Database Error',
+          err     : err,
+          summary : { name: err.name, message: err.message },
+        });
+        return;
+      }
+      res.status(200).json(result.rows);
     }
-    res.status(200).json(result.rows);
-  });
+  );
 };
 
 // GET /api/notes/:id gets note with id :id
@@ -131,9 +134,9 @@ const updateNote = (req, res) => {
         // console.log('given: ', title, content, date, archived);
 
         oldNote = result.data;
+        date = title || content ? moment().unix() : oldNote.date;
         title = title || oldNote.title;
         content = content || oldNote.content;
-        date = moment().unix();
         archived = archived;
 
         // console.log('putting with: ', title, content, date, archived);
