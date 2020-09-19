@@ -1,11 +1,11 @@
-require('dotenv').config({ path: '../' });
-const axios = require('axios');
-const moment = require('moment');
-const { Pool } = require('pg');
+require("dotenv").config({ path: "../" });
+const axios = require("axios");
+const moment = require("moment");
+const { Pool } = require("pg");
 
 const pool = new Pool();
 
-const notesTable = process.env.NOTE_TABLE || 'notes';
+const notesTable = process.env.NOTE_TABLE || "notes";
 
 // GET /api/notes gets all notes in db
 const getNotes = (req, res) => {
@@ -15,9 +15,9 @@ const getNotes = (req, res) => {
       if (err) {
         console.error(err);
         res.status(500).json({
-          msg     : '500 Database Error',
-          err     : err,
-          summary : { name: err.name, message: err.message },
+          msg: "500 Database Error",
+          err: err,
+          summary: { name: err.name, message: err.message },
         });
         return;
       }
@@ -30,19 +30,19 @@ const getNotes = (req, res) => {
 const getNoteById = (req, res) => {
   const id = parseInt(req.params.id);
   if (Number.isNaN(id)) {
-    res.status(400).json({ err: 'BAD REQUEST: id must be an int' });
+    res.status(400).json({ err: "BAD REQUEST: id must be an int" });
     return;
   } else {
     pool.query(
       `SELECT * FROM ${notesTable} WHERE id = ($1)`,
-      [ id ],
+      [id],
       (err, result) => {
         if (err) {
           console.error(err);
           res.status(500).json({
-            msg     : '500 Database Error',
-            err     : err,
-            summary : { name: err.name, message: err.message },
+            msg: "500 Database Error",
+            err: err,
+            summary: { name: err.name, message: err.message },
           });
           return;
         }
@@ -54,21 +54,22 @@ const getNoteById = (req, res) => {
 
 // POST /api/Notes title=random title&complete=false
 const createNote = (req, res) => {
-  let { title, content, date, archived } = req.body;
-  title = title || 'No Title';
-  content = content || 'No Content';
+  let { title, content, date, archived, severity } = req.body;
+  title = title || "No Title";
+  content = content || "No Content";
   date = date || moment().unix();
   archived = archived || false;
+  severity = severity || 50;
   pool.query(
-    `INSERT INTO ${notesTable} ( title, content, date, archived ) VALUES ($1, $2, $3, $4) RETURNING *`,
-    [ title, content, date, archived ],
+    `INSERT INTO ${notesTable} ( title, content, date, archived, severity ) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+    [title, content, date, archived, severity],
     (err, result) => {
       if (err) {
         console.error(err);
         res.status(500).json({
-          msg     : '500 Database Error',
-          err     : err,
-          summary : { name: err.name, message: err.message },
+          msg: "500 Database Error",
+          err: err,
+          summary: { name: err.name, message: err.message },
         });
         return;
       }
@@ -83,25 +84,25 @@ const deleteNote = (req, res) => {
   const id = parseInt(req.params.id);
 
   if (Number.isNaN(id)) {
-    res.status(400).json({ err: 'BAD REQUEST: id must be an int' });
+    res.status(400).json({ err: "BAD REQUEST: id must be an int" });
     return;
   } else {
     pool.query(
       `DELETE FROM ${notesTable} WHERE id = ($1)`,
-      [ id ],
+      [id],
       (err, result) => {
         if (err) {
           console.error(err);
           res.status(500).json({
-            msg     : '500 Database Error',
-            err     : err,
-            summary : { name: err.name, message: err.message },
+            msg: "500 Database Error",
+            err: err,
+            summary: { name: err.name, message: err.message },
           });
         }
 
         res.status(200).json({
-          msg : `note deleted with id ${id}`,
-          id  : id,
+          msg: `note deleted with id ${id}`,
+          id: id,
         });
       }
     );
@@ -112,18 +113,19 @@ const deleteNote = (req, res) => {
 const updateNote = (req, res) => {
   const id = parseInt(req.params.id);
   let oldNote;
-  let { title, content, date, archived } = req.body;
+  let { title, content, date, archived, severity } = req.body;
 
   // console.log('IN API.... DELETE THIS LOG');
 
   if (Number.isNaN(id)) {
-    res.status(400).json({ err: 'BAD REQUEST: id must be an int' });
+    res.status(400).json({ err: "BAD REQUEST: id must be an int" });
     return;
   } else {
     axios
       .get(
-        `http://${process.env.HOST || 'localhost'}:${process.env.PORT ||
-          '54321'}/api/notes/${id}`
+        `http://${process.env.HOST || "localhost"}:${
+          process.env.PORT || "54321"
+        }/api/notes/${id}`
       )
       .then((result) => {
         // console.log(`SENT REQ FOR ${id}, `, result.data);
@@ -134,23 +136,24 @@ const updateNote = (req, res) => {
         // console.log('given: ', title, content, date, archived);
 
         oldNote = result.data;
-        date = title || content ? moment().unix() : oldNote.date;
+        date = date || title || content ? moment().unix() : oldNote.date;
         title = title || oldNote.title;
         content = content || oldNote.content;
+        severity = severity || oldNote.severity;
         archived = archived;
 
         // console.log('putting with: ', title, content, date, archived);
 
         pool.query(
-          `UPDATE ${notesTable} SET title = ($1), content = ($2), date = ($3), archived = ($4) WHERE id = ($5) RETURNING *`,
-          [ title, content, date, archived, id ],
+          `UPDATE ${notesTable} SET title = ($1), content = ($2), date = ($3), archived = ($4), severity = ($5) WHERE id = ($6) RETURNING *`,
+          [title, content, date, archived, severity, id],
           (err, result) => {
             if (err) {
               console.error(err);
               result.status(500).json({
-                msg     : '500 Database Error',
-                err     : err,
-                summary : { name: err.name, message: err.message },
+                msg: "500 Database Error",
+                err: err,
+                summary: { name: err.name, message: err.message },
               });
               return;
             }
@@ -161,9 +164,9 @@ const updateNote = (req, res) => {
       .catch((err) => {
         console.error(err);
         res.status(500).json({
-          msg     : '500 Database Error',
-          err     : err,
-          summary : { name: err.name, message: err.message },
+          msg: "500 Database Error",
+          err: err,
+          summary: { name: err.name, message: err.message },
         });
         return;
       });
