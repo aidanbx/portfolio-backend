@@ -128,21 +128,16 @@ const updateNote = (req, res) => {
         }/api/notes/${id}`
       )
       .then((result) => {
-        // console.log(`SENT REQ FOR ${id}, `, result.data);
-
         if (result.err) {
           throw result.err;
         }
-        // console.log('given: ', title, content, date, archived);
 
         oldNote = result.data;
         date = date || title || content ? moment().unix() : oldNote.date;
         title = title || oldNote.title;
         content = content || oldNote.content;
         severity = severity || oldNote.severity;
-        archived = archived;
-
-        // console.log('putting with: ', title, content, date, archived);
+        archived = archived === undefined ? oldNote.archived : archived;
 
         pool.query(
           `UPDATE ${notesTable} SET title = ($1), content = ($2), date = ($3), archived = ($4), severity = ($5) WHERE id = ($6) RETURNING *`,
