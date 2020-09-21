@@ -7,84 +7,96 @@ A backend interface hosting RESTful APIs and logging middleware, built with Node
 [abarbieux.com/api/](https://www.abarbieux.com/api/) || [barbieux.dev/api/](https://barbieux.dev/api/) Both currently point to the same source
 
 ---
+
 ## Contents:
 
-  1. [Related Repos](#Related-Repos)
-  2. [Features](#Features)
-     1. [Todolist REST API](#Todolist-API)
-     2. [Mailer API](#Mailer-API)
-     3. [Request Logger](#Request-Logger)
-  3. [Setup](#Database-and-General-Setup)
-  4. [Reference Guides](#Reference-Guides)
+1. [Related Repos](#Related-Repos)
+2. [Features](#Features)
+   1. [Notes REST API](#Notes-API)
+   2. [Mailer API](#Mailer-API)
+   3. [Request Logger](#Request-Logger)
+3. [Setup](#Database-and-General-Setup)
+4. [Reference Guides](#Reference-Guides)
 
 ---
 
 ## Related Repos
 
+- #### `Front End:`
 
-* #### `Front End:`
+  - [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend) ~ The front end of a fully fledged portfolio website built with ReactJS in Typescript. Includes scripts and components that automatically generate content from photo folders, JSON files, and a back end interface.
 
-  * [portfolio-frontend](https://github.com/abarbieu/portfolio-frontend) ~ The front end of a fully fledged portfolio website built with ReactJS in Typescript. Includes scripts and components that automatically generate content from photo folders, JSON files, and a back end interface.
+- #### `Production:`
 
-* #### `Production:`
+  - [portfolio-production](https://github.com/abarbieu/portfolio-production) ~ Where optimized frontend and backend projects are combined and served with different routes and middleware.
 
-  * [portfolio-production](https://github.com/abarbieu/portfolio-production) ~ Where optimized frontend and backend projects are combined and served with different routes and middleware.
+- #### `Previously:`
 
-* #### `Previously:`
-
-  * [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground) ~ A place to test database design and commands
+  - [postgreSQL-playground](https://github.com/abarbieu/postgreSQL-playground) ~ A place to test database design and commands
 
 ## Features:
 
-* #### [`Notes Database:`](#Todolist-API)
+- #### [`Notes Database:`](#Todolist-API)
 
-  * Manage todolist items using a PostgreSQL database
-  
-* #### [`Auto Mailer:`](#Mailer-API)
+  - Manage Notes using a PostgreSQL database
 
-  * Send email forms using nodemailer
+- #### [`Auto Mailer:`](#Mailer-API)
 
-* #### [`Logging Middleware:`](#Request-Logger)
+  - Send email forms using nodemailer
 
-  * Middleware that saves all visits to a logs file containing **time, location, and IP** information
+- #### [`Logging Middleware:`](#Request-Logger)
+
+  - Middleware that saves all visits to a logs file containing **time, location, and IP** information
 
 ---
+
 ---
-## Todolist Api
+
+## Notes Api
+
 ---
+
 ### `Features:`
 
 Simple REST API commands:
 
 All data should be sent in url encoded format
 
-* `GET @/api/todos` 
-  * Returns all todos in database in the form 
-    ```ts 
-    [{ id: String, title: String, complete: Boolean }]
+- `GET @/api/notes`
+  - Returns all todos in database in the form
+    ```ts
+    [
+      {
+        title: String,
+        content: String,
+        severity: Real,
+        date: Integer,
+        archived: Boolean,
+      },
+    ];
     ```
-* `GET @/api/todos/:id`
-  * Returns single todo with provided id in the form: 
-    ```ts 
-    { id: String, title: String, complete: Boolean }
-    ```
-* `POST @/api/todos/?title=String&complete=Boolean `
-  * Creates a single todo with provided data, returns todo 
-* `PUT @/api/todos/:id`
-  * Updates a todo with given id, only toggling complete
-* `DELETE @/api/todos/:id`
-  * Deletes todo with given id
+- `GET @/api/notes/:id`
+  - Returns single note with provided id in the same form as above:
+- `POST @/api/notes/`
+  - Provide Title, Content, and other data in body
+  - Creates a single todo with provided data, returns todo
+- `PUT @/api/todos/:id`
+  - Updates a todo with given id, preserving any unspecified data
+- `DELETE @/api/todos/:id`
+  - Deletes note with given id
 
-
-(@ represents https://barbieux.dev, replace datatype after '=' with your data)
+(@ represents https://barbieux.dev)
 
 #### `Purpose:`
 
 This API is meant purely to manage the <https://barbieux.dev/notes/> page
 
 ---
+
 ## Mailer API
+
 ---
+
 #### `Features:`
 
 Request format:
@@ -100,30 +112,36 @@ POST @/mail/?replyto=String&name=String&subject=String&content=String
 This utility is used to contact me through a form displayed in a Contact Me Modal
 
 ---
+
 ## Request Logger
+
 ---
+
 #### `Features:`
 
 Logs all http requests to my website to a postgres database indexed by IP address.
 
 The following information is recorded:
 
-* IP address
-* Time requested
-* Request protocol, method, domain, path, subdomains
-* Geographic information
-  * **Not accurate enough to be a privacy concern**
-  * Rough Latitude/Longitude coordinates
-  * Corresponding Country, Region, City
-  * Area Code, Metro Code
+- IP address
+- Time requested
+- Request protocol, method, domain, path, subdomains
+- Geographic information
+  - **Not accurate enough to be a privacy concern**
+  - Rough Latitude/Longitude coordinates
+  - Corresponding Country, Region, City
+  - Area Code, Metro Code
 
 #### `Purpose:`
 
 To quantify traffic and reach, indentify malicious requests, and for some debugging
 
 ---
+
 ---
+
 # Database and General Setup:
+
 ---
 
 ### `Install postgreSQL`
@@ -135,7 +153,8 @@ service postgresql start                        # start psql on port 5432 (defau
 ```
 
 ### `Setup Node.js stuff for a new project:`
------
+
+---
 
 ```bash
 npm init
@@ -144,7 +163,8 @@ npm i express pg
 ```
 
 ### `Basic commands to get started:`
------
+
+---
 
 ```bash
 psql postgres           # Enter default db
@@ -158,7 +178,8 @@ psql -d db -U user -W   # Enter db via user with password
 ```
 
 ### `Basic SQL:`
------
+
+---
 
 ```SQL
 CREATE ROLE user WITH LOGIN PASSWORD 'password';
@@ -180,8 +201,10 @@ SELECT * FROM users;
 ```
 
 ### `Basic API testing with curl:`
+
 ##### I recommend using [postman](https://www.postman.com/) instead
------
+
+---
 
 ```bash
 curl http://localhost:3000/users                                                          # GET request
@@ -208,7 +231,8 @@ DEVPASS=emailpassword
 ```
 
 # Reference Guides:
-----
+
+---
 
 [Setting up a RESTful API with Node.js and PostgreSQL](https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/)
 
