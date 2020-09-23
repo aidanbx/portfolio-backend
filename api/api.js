@@ -29,6 +29,7 @@ app.use("/*", (req, res, next) => {
     log.domain === "aidanb.me" ||
     log.domain === "www.aidanb.me"
   ) {
+    console.log("HERE ", log.domain);
     res.redirect(301, "https://barbieux.dev" + log.url);
   }
   next();
