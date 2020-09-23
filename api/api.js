@@ -31,8 +31,9 @@ app.use("/*", (req, res, next) => {
   ) {
     console.log("HERE ---------------- ", log);
     res.redirect(301, "https://barbieux.dev" + log.url);
+  } else {
+    next();
   }
-  next();
 });
 
 app.use(
