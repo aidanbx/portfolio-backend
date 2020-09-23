@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 //! redirect
 app.use("/*", (req, res, next) => {
   const log = logger.makeLog(req);
+  console.log(log);
   if (
     log.domain === "abarbieux.com" ||
     log.domain === "www.abarbieux.com" ||
